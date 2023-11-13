@@ -3,16 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreProjectRequest extends FormRequest
+class UpdateTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,12 +22,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'bail|required|min:5|max:50',
-            'description' => 'bail|nullable|max:1000',
-            'image' => 'bail|nullable|image|max:5000',
-            'git_link' => ['bail', 'nullable', Rule::unique('projects')],
-            'external_link' => ['bail', 'nullable', Rule::unique('projects')],
-            'publication_date' => 'bail|nullable|date',
+            //
         ];
     }
 }

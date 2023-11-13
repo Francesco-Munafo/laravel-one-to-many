@@ -30,7 +30,6 @@ class UpdateProjectRequest extends FormRequest
             'git_link' => ['bail', 'nullable', Rule::unique('projects')->ignore($this->project)],
             'external_link' => ['bail', 'nullable', Rule::unique('projects')->ignore($this->project)],
             'publication_date' => 'bail|nullable|date',
-            'project_type' => 'bail|nullable|max:50'
         ];
     }
 }

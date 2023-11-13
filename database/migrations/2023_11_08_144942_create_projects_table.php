@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('git_link')->nullable();
             $table->string('external_link')->nullable();
             $table->date('publication_date')->nullable();
-            $table->string('project_type', 50)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
