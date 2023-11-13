@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Type;
+use GuzzleHttp\Promise\Create;
 
 class ProjectController extends Controller
 {
@@ -41,19 +42,22 @@ class ProjectController extends Controller
         $val_data = $request->validated();
 
         if ($request->has('image')) {
-            $file_path = Storage::put('placeholders', $val_data['image']);
+            $file_path = Storage::put('placeholders', $request->image);
+            $val_data['image'] = $file_path;
         }
 
-        $project = new Project();
-        $project->title = $val_data['title'];
-        $project->slug = Str::slug($project->title, '-');
-        $project->description = $val_data['description'];
-        $project->image = $file_path;
-        $project->git_link = $val_data['git_link'];
-        $project->external_link = $val_data['external_link'];
-        $project->publication_date = $val_data['publication_date'];
-        $project->project_type = $val_data['project_type'];
-        $project->save();
+        // $project = new Project();
+        // $project->title = $val_data['title'];
+        // $project->slug = Str::slug($project->title, '-');
+        // $project->description = $val_data['description'];
+        // $project->type_id = $val_data['type_id'];
+        // $project->image = $file_path;
+        // $project->git_link = $val_data['git_link'];
+        // $project->external_link = $val_data['external_link'];
+        // $project->publication_date = $val_data['publication_date'];
+        // $project->save();
+        $val_data['slug'] =  Project::generateSlug($val_data['title'], '-');
+        Project::create($val_data);
 
         return to_route('admin.projects.index')->with('message', 'Project created successfully!');
     }
@@ -63,6 +67,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+
+
         return view('admin.projects.show', ['project' => $project]);
     }
 
@@ -71,7 +77,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -80,6 +87,7 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $val_data = $request->validated();
+        //dd($val_data);
 
         if ($request->has('image')) {
             $newImage = $request->image;
@@ -95,6 +103,7 @@ class ProjectController extends Controller
 
             $val_data['slug'] = $project->generateSlug($request->title);
         }
+
 
 
 

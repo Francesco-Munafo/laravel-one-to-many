@@ -16,9 +16,9 @@ class Project extends Model
 
     protected $datas = ['deleted_at'];
 
-    protected $fillable = ['title', 'description', 'image', 'git_link', 'external_link', 'publication_date', 'project_type'];
+    protected $fillable = ['title', 'description', 'image', 'git_link', 'external_link', 'publication_date', 'type_id', 'slug'];
 
-    public function generateSlug($title)
+    public static function generateSlug($title)
     {
         return Str::slug($title, '-');
     }

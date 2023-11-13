@@ -39,6 +39,23 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
 
+            <div class="mb-3">
+                <label for="type_id" class="form-label @error('type_id') is-invalid @enderror">Choose a category</label>
+                <select class="form-select" name="type_id" id="type_id">
+                    <option selected disabled>Select one</option>
+                    <option>No type</option>
+
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}"
+                            {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>{{ $type->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            @error('type_id')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+
 
             <div class="mb-3">
                 <label for="image" class="form-label">Select a file</label>
@@ -80,16 +97,6 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
 
-
-            <div class="mb-3">
-                <label for="project_type" class="form-label">Project Type</label>
-                <input type="text" class="form-control @error('project_type') is-invalid @enderror" name="project_type"
-                    id="project_type" aria-describedby="helpProjectType" placeholder="Insert a project project type"
-                    value="{{ old('project_type', $project->project_type) }}">
-            </div>
-            @error('project_type')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
 
 
             <button class="btn btn-primary" type="submit">Submit</button>

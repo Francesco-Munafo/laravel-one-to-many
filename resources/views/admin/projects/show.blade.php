@@ -27,7 +27,8 @@
                             @if (str_contains($project->image, 'http'))
                                 <img class="img-fluid" src="{{ asset($project->image) }}" alt="Project preview">
                             @else
-                                <img class="h-100" src="{{ asset('storage/' . $project->image) }}" alt="Project preview">
+                                <img class="img-fluid" src="{{ asset('storage/' . $project->image) }}"
+                                    alt="Project preview">
                             @endif
                         </div>
                         <div class="col-md-8">
@@ -43,7 +44,7 @@
                                     <small class="text-secondary">Publication date:</small>
                                     <h6>{{ $project->publication_date }}</h6>
                                     <small class="text-secondary">Type:</small>
-                                    <h6>{{ $project->project_type }}</h6>
+                                    <span class="badge rounded-pill text-bg-primary">{{ $project->type?->name }}</span>
 
                                 </div>
                                 <div class="col mt-5">

@@ -34,6 +34,7 @@
                             <th>ID</th>
                             <th>TITLE</th>
                             <th>DESCRIPTION</th>
+                            <th>TYPE</th>
                             <th>IMAGE</th>
                             <th>URLs</th>
                             <th>DATE</th>
@@ -46,6 +47,9 @@
                         @foreach ($projects as $project)
                             <tr class="table-light">
                                 <td scope="row">{{ $project->id }}</td>
+                                <td><span
+                                        class="badge rounded-pill text-bg-primary w-100">{{ $project->type?->name }}</span>
+                                </td>
                                 <td>{{ $project->title }}</td>
                                 <td class="w-50">{{ $project->description }}</td>
                                 <td>

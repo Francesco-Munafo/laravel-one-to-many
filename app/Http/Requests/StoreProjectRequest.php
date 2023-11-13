@@ -25,6 +25,7 @@ class StoreProjectRequest extends FormRequest
         return [
             'title' => 'bail|required|min:5|max:50',
             'description' => 'bail|nullable|max:1000',
+            'type_id' => ['nullable', 'exists:types,id'],
             'image' => 'bail|nullable|image|max:5000',
             'git_link' => ['bail', 'nullable', Rule::unique('projects')],
             'external_link' => ['bail', 'nullable', Rule::unique('projects')],
