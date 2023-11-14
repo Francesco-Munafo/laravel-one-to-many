@@ -32,9 +32,9 @@
                         <caption>Projects</caption>
                         <tr>
                             <th>ID</th>
+                            <th>TYPE</th>
                             <th>TITLE</th>
                             <th>DESCRIPTION</th>
-                            <th>TYPE</th>
                             <th>IMAGE</th>
                             <th>URLs</th>
                             <th>DATE</th>
